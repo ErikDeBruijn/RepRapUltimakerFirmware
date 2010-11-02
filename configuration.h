@@ -289,6 +289,13 @@
 #define B_TEMP_PID_IGAIN 0.07
 #define B_TEMP_PID_DGAIN 1
 
+// The things below should not be changed unless you know what you're doing:
+
+#define X_STEPS_PER_INCH (X_STEPS_PER_MM*INCHES_TO_MM) // *RO
+#define Y_STEPS_PER_INCH (Y_STEPS_PER_MM*INCHES_TO_MM) // *RO
+#define Z_STEPS_PER_INCH (Z_STEPS_PER_MM*INCHES_TO_MM) // *RO
+
+
 //our command string length
 
 #define COMMAND_SIZE 128 // *RO
@@ -340,12 +347,4 @@ inline void resetTimer()
   TCNT2 = 0;
 }
 
-/* The things below should not be changed unless you know what you're doing:
-
-#define X_STEPS_PER_INCH (X_STEPS_PER_MM*INCHES_TO_MM) // *RO
-#define Y_STEPS_PER_INCH (Y_STEPS_PER_MM*INCHES_TO_MM) // *RO
-#define Z_STEPS_PER_INCH (Z_STEPS_PER_MM*INCHES_TO_MM) // *RO
-
-
-*/
 #endif
