@@ -27,10 +27,10 @@ void fancy_init()
 // set up the LCD's number of rows and columns:
 byte Degree[8] =
 {
-  B01110,
-  B10001,
-  B10001,
-  B01110,
+  B01100,
+  B10010,
+  B10010,
+  B01100,
   B00000,
   B00000,
   B00000,

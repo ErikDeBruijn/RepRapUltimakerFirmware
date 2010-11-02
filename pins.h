@@ -2,6 +2,7 @@
 #define PINS_H
 
 #define MOTHERBOARD 3
+#define ULTIMAKER_BOARD_MINOR_VERSION 1
 
 #if MOTHERBOARD == 3
 
@@ -24,7 +25,7 @@
 *********************************************************************************************/
 
 // SELECT THE VERSION OF THE MOTHERBOARD THAT YOU HAVE.
-#if ULTIMAKER_BOARD == 1.1
+#if ULTIMAKER_BOARD_MINOR_VERSION == 1
 
 #define DEBUG_PIN        0
 
@@ -68,11 +69,13 @@
 #define EXTRUDER_1_HEATER_PIN (byte)3
 #define EXTRUDER_1_TEMPERATURE_PIN (byte)10 
 
-#endif //ULTIMAKER_BOARD==1.1
+#endif //ULTIMAKER_BOARD=="1.1"
 
 /* THE OLDER VERSIONS OF THE PCB */
 
-#if ULTIMAKER_BOARD == 1.0
+#if ULTIMAKER_BOARD_MINOR_VERSION == 0
+
+#define DEBUG_PIN        0
 
 #define X_STEP_PIN (byte)25
 #define X_DIR_PIN (byte)23
@@ -115,7 +118,7 @@ enX=27,enY29,enY35,ext41,A51
 #define EXTRUDER_1_HEATER_PIN (byte)3
 #define EXTRUDER_1_TEMPERATURE_PIN (byte)9 
 
-#endif //ULTIMAKER_BOARD==1.1
+#endif //ULTIMAKER_BOARD_MINOR_VERSION==0
 
 #else
 #error Unknown MOTHERBOARD value in configuration.h
