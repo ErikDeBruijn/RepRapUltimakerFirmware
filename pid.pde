@@ -130,19 +130,47 @@ void PIDcontrol::internalTemperature()
 //  if(heater_alternate)
 if(temp_pin == EXTRUDER_0_TEMPERATURE_PIN)
 {
-  set_RGB_R(currentTemperature);
+#ifdef FANCY_LCD
+if((fancy_iterator++)==40)
+{
+  //set_RGB_R(currentTemperature);
+  fancy_iterator = 0;
+  lcd.setCursor(0, 1);    //begin van de regel (0) en op de 2de rij (1)
+  String Status = "T";
+  Status += currentTemperature;
+  Status += "/";
+  Status += targetTemp;
+  Status += "'C,";
+  Status += bedTemp;
+  Status +="'C    ";
+  lcd.print(Status);
+  lcd.setCursor(0, 1); //termometer sign
+  lcd.write(1);
+  lcd.setCursor(5+((currentTemperature>99)?1:0)+((targetTemp>9)?1:0)+((targetTemp>99)?1:0), 1);    //begin van de regel (0) en op de 2de rij (1)
+  lcd.write(0);
+  lcd.setCursor(10+((currentTemperature>99)?1:0)+((targetTemp>9)?1:0)+((targetTemp>99)?1:0)+((bedTemp>99)?1:0), 1);    //begin van de regel (0) en op de 2de rij (1)
+  lcd.write(0);
+  //lcd.setCursor(2, 1);    //begin van de regel (0) en op de 2de rij (1)
+  //         1234567890123456
+  //lcd.print(currentTemperature);
+}
+#endif
 } else
-  set_RGB_R(0);
-
-//  else
-//    set_RGB_R(targetTemperature);
-//  heater_alternate = !heater_alternate;
+{
+  bedTemp = currentTemperature;
+//if((fancy_iterator++)==40)
+//{
+//}
+}
 #endif
 }
 
 
 void PIDcontrol::pidCalculation(int target)
 {
+#ifdef FANCY_LCD
+targetTemp = target;
+#endif
 // New ifdef fixes compilation error with thermocouples
 #ifdef USE_THERMISTOR
   if(doingBed)

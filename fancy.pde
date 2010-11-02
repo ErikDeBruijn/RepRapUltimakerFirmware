@@ -4,6 +4,10 @@
  *
 */
 #include "fancy.h"
+#ifdef FANCY_LCD
+#include <LiquidCrystal.h>
+LiquidCrystal lcd(24, 22, 36, 34, 32, 30);  //RS,Enable,D4,D5,D6,D7 //deze is voor onze pcb
+#endif
 
 #ifdef FANCY
 
@@ -18,6 +22,41 @@ void fancy_init()
     setRGB(i*.75,i*.75,i);
     delay(4);
   }
+#endif
+#ifdef FANCY_LCD
+// set up the LCD's number of rows and columns:
+byte Degree[8] =
+{
+  B01110,
+  B10001,
+  B10001,
+  B01110,
+  B00000,
+  B00000,
+  B00000,
+  B00000
+};
+byte Thermometer[8] =
+{
+  B00100,
+  B01010,
+  B01010,
+  B01010,
+  B01010,
+  B10001,
+  B10001,
+  B01110
+};
+
+lcd.createChar(0,Degree);
+lcd.createChar(1,Thermometer);
+lcd.begin(16, 2);   //opgeven wat voor lcd
+// Print a message to the LCD.
+lcd.print("Ultimaker  v1.0!");
+lcd.setCursor(0, 1);    //begin van de regel (0) en op de 2de rij (1)
+//         1234567890123456
+lcd.print("Ready to connect");
+
 #endif
 }
 void setRGB(byte r, byte g, byte b)
@@ -39,4 +78,15 @@ void set_RGB_B(byte b)
   analogWrite(RGB_R_PIN,b);
 }
 
+#endif
+#ifdef FANCY_LCD
+/*  int i;
+void loop()
+{
+  i++;
+lcd.setCursor(0, 1);    //begin van de regel (0) en op de 2de rij (1)
+lcd.print(i);
+delay(500);  
+}
+*/
 #endif
