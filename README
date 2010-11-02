@@ -1,0 +1,1 @@
+This firmware is based on the RepRap FiveD firmware and will be updated with RepRap commits. As well, it will be maintained by Erik de Bruijn with an emphasis on supporting multiple Host software's. It should already work well with the Java host, but I've added ReplicatorG drivers, etc.
