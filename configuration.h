@@ -66,11 +66,9 @@
 #define ENDSTOP_PULL_UPS true
 
 #define X_STEPS_PER_MM   7.99735
-#define X_STEPS_PER_INCH (X_STEPS_PER_MM*INCHES_TO_MM) // *RO
 #define INVERT_X_DIR 0
 
 #define Y_STEPS_PER_MM   7.99735
-#define Y_STEPS_PER_INCH (Y_STEPS_PER_MM*INCHES_TO_MM) // *RO
 #define INVERT_Y_DIR 0
 
 #define Z_STEPS_PER_MM   320
@@ -167,7 +165,7 @@
 
 // Set ENDSTOP_PULL_UPS to "true" if you're using microswitches
 // This will put a logical high in the input pins by connecting an internal 20K resistor to Vcc.
-#define ENDSTOP_PULL_UPS true
+#define ENDSTOP_PULL_UPS false
 
 // Set to one if the axis opto-sensor outputs inverting (ie: 1 means open, 0 means closed)
 // RepRap opto endstops with H21LOI sensors are not inverting; ones with H21LOB
@@ -183,18 +181,15 @@
 // Axis scaling in stepper-motor steps per mm of movement
 
 // Select 1/16 STEP!
-#define X_STEPS_PER_MM   79.87220447 //Ultimaker's belt pitch is 2.032mm. 2.032*20=40.064. 40.64/200/16 mm/step
-#define X_STEPS_PER_INCH (X_STEPS_PER_MM*INCHES_TO_MM) // *RO
-#define INVERT_X_DIR 0
+#define X_STEPS_PER_MM   79.87220447 //Ultimaker's belt pitch is 2.032mm. 2.032*20=40.064. 40.064/200/16 mm/step
+#define INVERT_X_DIR 1
 
 // Select 1/16 STEP!
 #define Y_STEPS_PER_MM   79.87220447
-#define Y_STEPS_PER_INCH (Y_STEPS_PER_MM*INCHES_TO_MM) // *RO
 #define INVERT_Y_DIR 0
 
 // This stepper driver should be in QUARTER STEP MODE (LOW/HIGH/LOW I think)
 #define Z_STEPS_PER_MM   200*8/1.25 //6667.184 
-#define Z_STEPS_PER_INCH (Z_STEPS_PER_MM*INCHES_TO_MM) // *RO
 #define INVERT_Z_DIR 1
 
 // Stepper-driven extruder
@@ -214,6 +209,7 @@
 // If you want to enable fancy stuff like RGB LEDs for feedback and just to show off.
 // Make sure FANCY is defined if you want to have this enabled, otherwise comment it out.
 #define FANCY
+#define FANCY_LCD
 
 #endif
 
@@ -344,30 +340,12 @@ inline void resetTimer()
   TCNT2 = 0;
 }
 
-#endif
+/* The things below should not be changed unless you know what you're doing:
 
-//*************************************************************************
+#define X_STEPS_PER_INCH (X_STEPS_PER_MM*INCHES_TO_MM) // *RO
+#define Y_STEPS_PER_INCH (Y_STEPS_PER_MM*INCHES_TO_MM) // *RO
+#define Z_STEPS_PER_INCH (Z_STEPS_PER_MM*INCHES_TO_MM) // *RO
 
-#if 0
-// Green machine:
-//#define ENDSTOPS_INVERTING 0
 
-// parameters for the Bath U. mendel prototype
-#define X_STEPS_PER_MM   13.333333
-#define X_STEPS_PER_INCH (X_STEPS_PER_MM*INCHES_TO_MM)
-#define INVERT_X_DIR 0
-
-#define Y_STEPS_PER_MM   13.333333
-#define Y_STEPS_PER_INCH (Y_STEPS_PER_MM*INCHES_TO_MM)
-#define INVERT_Y_DIR 0
-
-// Green machine:
-#define Z_STEPS_PER_MM   944.88
-// Fat Z cog machine:
-//#define Z_STEPS_PER_MM   558.864
-// Standard Mendel:
-//#define Z_STEPS_PER_MM   833.398
-#define Z_STEPS_PER_INCH (Z_STEPS_PER_MM*INCHES_TO_MM)
-#define INVERT_Z_DIR 0
-
+*/
 #endif
