@@ -23,10 +23,6 @@
 
 #define MOTHERBOARD 3
 
-// The width of Henry VIII's thumb (or something).
-
-#define INCHES_TO_MM 25.4 // *RO
-
 // The number of real extruders in this machine
 
 #define EXTRUDER_COUNT 1
@@ -63,16 +59,15 @@
 
 // Set ENDSTOP_PULL_UPS to "true" if you're using microswitches
 // This will put a logical high in the input pins by connecting an internal 20K resistor to Vcc.
-#define ENDSTOP_PULL_UPS true
+#define ENDSTOP_PULL_UPS false
 
 #define X_STEPS_PER_MM   7.99735
-#define INVERT_X_DIR 0
-
 #define Y_STEPS_PER_MM   7.99735
-#define INVERT_Y_DIR 0
-
 #define Z_STEPS_PER_MM   320
-#define Z_STEPS_PER_INCH (Z_STEPS_PER_MM*INCHES_TO_MM) // *RO
+
+// If either of the axes runs in the wrong direction, you can correct this here:
+#define INVERT_X_DIR 0
+#define INVERT_Y_DIR 0
 #define INVERT_Z_DIR 0
 
 // Stepper-driven extruder
@@ -80,7 +75,6 @@
 // extrude 1mm out of the nozzle.  E0 for extruder 0;
 // E1 for extruder 1, and so on.
 
-//#define E_STEPS_PER_MM   0.9     // NEMA 17 extruder 5mm diameter drive - empirically adjusted
 #define E0_STEPS_PER_MM   2.2      // NEMA 17 59/11 geared extruder 8mm diameter drive
 #define E1_STEPS_PER_MM   2.2      // NEMA 17 59/11 geared extruder 8mm diameter drive
 
@@ -89,7 +83,7 @@
 
 #define SLOW_CLOCK 2000
 
-#endif
+#endif // end of motherboard 1 specfic settings
 
 //**********************************************************************************************
 
@@ -104,7 +98,7 @@
 
 // Set ENDSTOP_PULL_UPS to "true" if you're using microswitches
 // This will put a logical high in the input pins by connecting an internal 20K resistor to Vcc.
-#define ENDSTOP_PULL_UPS true
+#define ENDSTOP_PULL_UPS false
 
 // Set to one if the axis opto-sensor outputs inverting (ie: 1 means open, 0 means closed)
 // RepRap opto endstops with H21LOI sensors are not inverting; ones with H21LOB
@@ -123,16 +117,13 @@
 
 // Axis scaling in stepper-motor steps per mm of movement
 
-#define X_STEPS_PER_MM   10.047
-#define X_STEPS_PER_INCH (X_STEPS_PER_MM*INCHES_TO_MM) // *RO
+#define X_STEPS_PER_MM   6667.184
+#define Y_STEPS_PER_MM   80.376
+#define Z_STEPS_PER_MM   6667.184
+
+// If either of the axes runs in the wrong direction, you can correct this here:
 #define INVERT_X_DIR 0
-
-#define Y_STEPS_PER_MM   10.047
-#define Y_STEPS_PER_INCH (Y_STEPS_PER_MM*INCHES_TO_MM) // *RO
 #define INVERT_Y_DIR 0
-
-#define Z_STEPS_PER_MM   833.398
-#define Z_STEPS_PER_INCH (Z_STEPS_PER_MM*INCHES_TO_MM) // *RO
 #define INVERT_Z_DIR 0
 
 // Stepper-driven extruder
@@ -140,11 +131,10 @@
 // extrude 1mm out of the nozzle.  E0 for extruder 0;
 // E1 for extruder 1, and so on.
 
-//#define E_STEPS_PER_MM   0.9     // NEMA 17 extruder 5mm diameter drive - empirically adjusted
 #define E0_STEPS_PER_MM   2.2      // NEMA 17 59/11 geared extruder 8mm diameter drive
 #define E1_STEPS_PER_MM   2.2      // NEMA 17 59/11 geared extruder 8mm diameter drive
 
-#endif
+#endif // end of motherboard 2 specific settings
 
 //**********************************************************************************************
 
@@ -188,16 +178,21 @@
 #define Y_STEPS_PER_MM   79.87220447
 #define INVERT_Y_DIR 0
 
-// This stepper driver should be in QUARTER STEP MODE (LOW/HIGH/LOW I think)
+// If you want to be able to move this very fast and not run into firmware problems, use or configure the stepper motor driver for the Z-axis
+// as QUARTER STEP MODE (Polulu: LOW/HIGH/LOW I think)
 #define Z_STEPS_PER_MM   200*8/1.25 //6667.184 
 #define INVERT_Z_DIR 1
+
+// If either of the axes runs in the wrong direction, you can correct this here:
+#define INVERT_X_DIR 0
+#define INVERT_Y_DIR 0
+#define INVERT_Z_DIR 0
 
 // Stepper-driven extruder
 // E_STEPS_PER_MM is the number of steps needed to 
 // extrude 1mm out of the nozzle.  E0 for extruder 0;
 // E1 for extruder 1, and so on.
 
-//#define E_STEPS_PER_MM   0.9      // NEMA 17 extruder 5mm diameter drive - empirically adjusted
 #define E0_STEPS_PER_MM   14.0//17.6      // NEMA 17 59/11 geared extruder 8mm diameter drive
 #define E1_STEPS_PER_MM   14.0//17.6      // NEMA 17 59/11 geared extruder 8mm diameter drive
 
@@ -208,16 +203,16 @@
 
 // If you want to enable fancy stuff like RGB LEDs for feedback and just to show off.
 // Make sure FANCY is defined if you want to have this enabled, otherwise comment it out.
-#define FANCY
-#define FANCY_LCD
+//#define FANCY
+//#define FANCY_LCD
 
-#endif
+#endif // end of motherboard 3 specific settings
 
 //**********************************************************************************************
 
-// The speed at which to talk with the host computer; default is 19200
+// The speed at which to talk with the host computer; default is 57600 for ReplicatorG, 19200 for the Java host!
 
-#define HOST_BAUD 57600//19200 // *RO
+#define HOST_BAUD 57600 // *RO
 
 // Set 1s where you have endstops; 0s where you don't
 // Both Darwin and Mendel have MIN endstops, but not MAX ones.
@@ -288,6 +283,10 @@
 #define B_TEMP_PID_PGAIN 2
 #define B_TEMP_PID_IGAIN 0.07
 #define B_TEMP_PID_DGAIN 1
+
+// The width of Henry VIII's thumb (or something).
+
+#define INCHES_TO_MM 25.4 // *RO
 
 // The things below should not be changed unless you know what you're doing:
 
