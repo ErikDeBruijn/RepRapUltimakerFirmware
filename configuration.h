@@ -1,6 +1,11 @@
 #ifndef CONFIGURATION_H
 #define CONFIGURATION_H
 
+// THIS IS A CONFIGURAITON FOR A CUSTOM SETUP: DO NOT USE UNLESS YOU KNOW WHAT YOU ARE DOING!
+//
+// ERIK'S HUXLEY!!
+
+
 /*
  *  This is the configuration file for the RepRap Motherboard microcontroller.
  *  Set values in it to match your RepRap machine.
@@ -21,11 +26,7 @@
 // RepRap Motherboard with RS485 extruders: 2
 // Arduino Mega: 3
 
-#define MOTHERBOARD 3
-
-// The width of Henry VIII's thumb (or something).
-
-#define INCHES_TO_MM 25.4 // *RO
+#define MOTHERBOARD 1
 
 // The number of real extruders in this machine
 
@@ -39,9 +40,16 @@
 
 // Temperature measurement
 // Uncomment ONE of the next three
-#define USE_THERMISTOR
-//#define AD595_THERMOCOUPLE
+// Erik: I NEED TWO!??!!?
+// TODO: separate out for extruder and bed!!
+//#define USE_THERMISTOR
+#define AD595_THERMOCOUPLE
 //#define MAX6675_THERMOCOUPLE
+
+// With the Sanguino, in some implementations, the PWM support conflicts 
+// with this firmware's use of interrupts. If this is the case, turn on
+// software PWM for the extruder heater control by uncommenting this line:
+#define E_HEATER_SOFTWARE_PWM
 
 // Uncomment the next line if this is driving a paste extruder
 //#define PASTE_EXTRUDER
@@ -50,7 +58,7 @@
 // Set to 1 if enable pins are inverting
 // For RepRap stepper boards version 1.x the enable pins are *not* inverting.
 // For RepRap stepper boards version 2.x and above the enable pins are inverting.
-#define INVERT_ENABLE_PINS 0
+#define INVERT_ENABLE_PINS 1
 
 // Set to one if the axis opto-sensor outputs inverting (ie: 1 means open, 0 means closed)
 // RepRap opto endstops with H21LOI sensors are not inverting; ones with H21LOB
@@ -63,16 +71,15 @@
 
 // Set ENDSTOP_PULL_UPS to "true" if you're using microswitches
 // This will put a logical high in the input pins by connecting an internal 20K resistor to Vcc.
-#define ENDSTOP_PULL_UPS true
+//#define ENDSTOP_PULL_UPS true
 
-#define X_STEPS_PER_MM   7.99735
+#define X_STEPS_PER_MM    53.33333 // 200steps/(11teeth*5mm)*16= 55mm/200steps /// //58.18182 /experim:56.27548784911135291984
 #define INVERT_X_DIR 0
 
-#define Y_STEPS_PER_MM   7.99735
+#define Y_STEPS_PER_MM   80 //  200stepsPerRev/(8teeth*5mm)*16uStep 
 #define INVERT_Y_DIR 0
 
-#define Z_STEPS_PER_MM   320
-#define Z_STEPS_PER_INCH (Z_STEPS_PER_MM*INCHES_TO_MM) // *RO
+#define Z_STEPS_PER_MM   (500) // 200steps/(8teeth*5mm)*2(halfstep)*200
 #define INVERT_Z_DIR 0
 
 // Stepper-driven extruder
@@ -81,8 +88,8 @@
 // E1 for extruder 1, and so on.
 
 //#define E_STEPS_PER_MM   0.9     // NEMA 17 extruder 5mm diameter drive - empirically adjusted
-#define E0_STEPS_PER_MM   2.2      // NEMA 17 59/11 geared extruder 8mm diameter drive
-#define E1_STEPS_PER_MM   2.2      // NEMA 17 59/11 geared extruder 8mm diameter drive
+#define E0_STEPS_PER_MM   5.0      // NEMA 17 59/11 geared extruder 8mm diameter drive
+#define E1_STEPS_PER_MM   5.0      // NEMA 17 59/11 geared extruder 8mm diameter drive
 
 // The temperature routines get called each time the main loop
 // has gone round this many times
@@ -93,137 +100,15 @@
 
 //**********************************************************************************************
 
-// These settings are mainly for a standard Mendel
+// The speed at which to talk with the host computer; default is 57600
 
-#if MOTHERBOARD == 2
-
-// Set to 1 if enable pins are inverting
-// For RepRap stepper boards version 1.x the enable pins are *not* inverting.
-// For RepRap stepper boards version 2.x and above the enable pins are inverting.
-#define INVERT_ENABLE_PINS 1
-
-// Set ENDSTOP_PULL_UPS to "true" if you're using microswitches
-// This will put a logical high in the input pins by connecting an internal 20K resistor to Vcc.
-#define ENDSTOP_PULL_UPS true
-
-// Set to one if the axis opto-sensor outputs inverting (ie: 1 means open, 0 means closed)
-// RepRap opto endstops with H21LOI sensors are not inverting; ones with H21LOB
-// are inverting.
-//     Set [XYZ]_ENDSTOP_INVERTING to "true" for using microswitches.
-
-#define X_ENDSTOP_INVERTING true
-#define Y_ENDSTOP_INVERTING true
-#define Z_ENDSTOP_INVERTING true
-
-#define MY_NAME 'H'           // Byte representing the name of this device
-#define E0_NAME '0'           // Byte representing the name of extruder 0
-#define E1_NAME '1'           // Byte representing the name of extruder 1
-
-#define RS485_MASTER  1       // *RO
-
-// Axis scaling in stepper-motor steps per mm of movement
-
-#define X_STEPS_PER_MM   10.047
-#define X_STEPS_PER_INCH (X_STEPS_PER_MM*INCHES_TO_MM) // *RO
-#define INVERT_X_DIR 0
-
-#define Y_STEPS_PER_MM   10.047
-#define Y_STEPS_PER_INCH (Y_STEPS_PER_MM*INCHES_TO_MM) // *RO
-#define INVERT_Y_DIR 0
-
-#define Z_STEPS_PER_MM   833.398
-#define Z_STEPS_PER_INCH (Z_STEPS_PER_MM*INCHES_TO_MM) // *RO
-#define INVERT_Z_DIR 0
-
-// Stepper-driven extruder
-// E_STEPS_PER_MM is the number of steps needed to 
-// extrude 1mm out of the nozzle.  E0 for extruder 0;
-// E1 for extruder 1, and so on.
-
-//#define E_STEPS_PER_MM   0.9     // NEMA 17 extruder 5mm diameter drive - empirically adjusted
-#define E0_STEPS_PER_MM   2.2      // NEMA 17 59/11 geared extruder 8mm diameter drive
-#define E1_STEPS_PER_MM   2.2      // NEMA 17 59/11 geared extruder 8mm diameter drive
-
-#endif
-
-//**********************************************************************************************
-
-// These settings are mainly for a Mendel with an Arduino Mega controller and Pololu stepper drivers
-// See http://reprap.org/wiki/Pololu_Electronics
-
-#if MOTHERBOARD == 3
-
-// Comment out this if you are using a thermocouple
-#define USE_THERMISTOR
-//#define AD595_THERMOCOUPLE
-//#define MAX6675_THERMOCOUPLE
-
-// Set to 1 if enable pins are inverting
-// For RepRap stepper boards version 1.x the enable pins are *not* inverting.
-// For RepRap stepper boards version 2.x and above the enable pins are inverting.
-#define INVERT_ENABLE_PINS 1
-
-// Set ENDSTOP_PULL_UPS to "true" if you're using microswitches
-// This will put a logical high in the input pins by connecting an internal 20K resistor to Vcc.
-#define ENDSTOP_PULL_UPS false
-
-// Set to one if the axis opto-sensor outputs inverting (ie: 1 means open, 0 means closed)
-// RepRap opto endstops with H21LOI sensors are not inverting; ones with H21LOB
-// are inverting.
-// Set [XYZ]_ENDSTOP_INVERTING to "true" for using microswitches.
-
-#define X_ENDSTOP_INVERTING true
-#define Y_ENDSTOP_INVERTING true
-#define Z_ENDSTOP_INVERTING true
-
-// Motherboard 3 driving Pololu microstepping controllers - 16 microsteps
-
-// Axis scaling in stepper-motor steps per mm of movement
-
-// Select 1/16 STEP!
-#define X_STEPS_PER_MM   79.87220447 //Ultimaker's belt pitch is 2.032mm. 2.032*20=40.064. 40.064/200/16 mm/step
-#define INVERT_X_DIR 1
-
-// Select 1/16 STEP!
-#define Y_STEPS_PER_MM   79.87220447
-#define INVERT_Y_DIR 0
-
-// This stepper driver should be in QUARTER STEP MODE (LOW/HIGH/LOW I think)
-#define Z_STEPS_PER_MM   200*8/1.25 //6667.184 
-#define INVERT_Z_DIR 1
-
-// Stepper-driven extruder
-// E_STEPS_PER_MM is the number of steps needed to 
-// extrude 1mm out of the nozzle.  E0 for extruder 0;
-// E1 for extruder 1, and so on.
-
-//#define E_STEPS_PER_MM   0.9      // NEMA 17 extruder 5mm diameter drive - empirically adjusted
-#define E0_STEPS_PER_MM   14.0//17.6      // NEMA 17 59/11 geared extruder 8mm diameter drive
-#define E1_STEPS_PER_MM   14.0//17.6      // NEMA 17 59/11 geared extruder 8mm diameter drive
-
-// The temperature routines get called each time the main loop
-// has gone round this many times
-
-#define SLOW_CLOCK 2000
-
-// If you want to enable fancy stuff like RGB LEDs for feedback and just to show off.
-// Make sure FANCY is defined if you want to have this enabled, otherwise comment it out.
-#define FANCY
-#define FANCY_LCD
-
-#endif
-
-//**********************************************************************************************
-
-// The speed at which to talk with the host computer; default is 19200
-
-#define HOST_BAUD 57600//19200 // *RO
+#define HOST_BAUD 57600 // *RO
 
 // Set 1s where you have endstops; 0s where you don't
 // Both Darwin and Mendel have MIN endstops, but not MAX ones.
 
 #define ENDSTOPS_MIN_ENABLED 1
-#define ENDSTOPS_MAX_ENABLED 1
+#define ENDSTOPS_MAX_ENABLED 0
 
 // The number of mm below which distances are insignificant (one tenth the
 // resolution of the machine is the default value).
@@ -272,7 +157,7 @@
 // Too long and the melt will extend too far up the insulating tube.
 // Default value: 10
 
-#define WAIT_AT_TEMPERATURE 10
+#define WAIT_AT_TEMPERATURE 4 //10
 
 // PID gains.  E_ = extruder, B_ = bed.  The Es are about right for a brass extruder about 8 mm 
 // in diameter and 30 mm long heated by a 6 ohm coil with a 12v supply.  The B_ values are OK
@@ -280,21 +165,28 @@
 // Extruding increase biases the input to the extruder heater when the extruder
 // is running as it requires more power.
 
-#define E_TEMP_PID_PGAIN 2
-#define E_TEMP_PID_IGAIN 0.15
-#define E_TEMP_PID_DGAIN 0.5
+// Deze settings werken misschien beter:
+#define E_TEMP_PID_PGAIN 5.0
+#define E_TEMP_PID_IGAIN 0.1
+#define E_TEMP_PID_DGAIN 100.0
+
+//#define E_TEMP_PID_PGAIN 2
+//#define E_TEMP_PID_IGAIN 0.15
+//#define E_TEMP_PID_DGAIN 0.5
 #define EXTRUDING_INCREASE 7
 
 #define B_TEMP_PID_PGAIN 2
 #define B_TEMP_PID_IGAIN 0.07
 #define B_TEMP_PID_DGAIN 1
 
-// The things below should not be changed unless you know what you're doing:
+// The width of Henry VIII's thumb (or something).
 
+#define INCHES_TO_MM 25.4 // *RO
+
+//calculate steps in inches
 #define X_STEPS_PER_INCH (X_STEPS_PER_MM*INCHES_TO_MM) // *RO
 #define Y_STEPS_PER_INCH (Y_STEPS_PER_MM*INCHES_TO_MM) // *RO
 #define Z_STEPS_PER_INCH (Z_STEPS_PER_MM*INCHES_TO_MM) // *RO
-
 
 //our command string length
 
@@ -348,3 +240,4 @@ inline void resetTimer()
 }
 
 #endif
+
