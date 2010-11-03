@@ -4,7 +4,7 @@
 #define MOTHERBOARD 3
 
 // Set this to 0, 1, x for board versions v1.0, v1.1 or v1.x, etc.
-#define ULTIMAKER_BOARD_MINOR_VERSION 1
+#define ULTIMAKER_BOARD_MINOR_VERSION 0
 
 #if MOTHERBOARD == 3
 
@@ -86,7 +86,7 @@
 
 #define X_STEP_PIN (byte)25
 #define X_DIR_PIN (byte)23
-#define X_MIN_PIN (byte)12// needed a different PIN than 13!
+#define X_MIN_PIN (byte)10// needed a different PIN than 13!
 #define X_MAX_PIN (byte)12
 #define X_ENABLE_PIN (byte)27
 

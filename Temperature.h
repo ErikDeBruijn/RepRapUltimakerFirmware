@@ -21,7 +21,7 @@
 // r2: 4700
 // beta: 4036
 // max adc: 1023
-#define NUMTEMPS 20
+/*#define NUMTEMPS 20
 short temptable[NUMTEMPS][2] = {
    {1, 864},
    {54, 258},
@@ -44,7 +44,7 @@ short temptable[NUMTEMPS][2] = {
    {955, 34},
    {1008, 2}
 };
-
+*/
 
 // ... And this is the heated bed thermistor (if any)
 
@@ -86,7 +86,7 @@ short bedtemptable[NUMTEMPS][2] = {
 //Thermistor 204GT  200K Ohms at ambient 600 ohm ref resister, 5V
 // Used by BitsFromBytes (3.0, 3.1)
 // 1k5 Ohm to Vcc. In parallel with 4K7 Ohm to ground.
-/*#define NUMTEMPS 30
+#define NUMTEMPS 30
 short temptable[NUMTEMPS][2] = {
 {85,300},
 {97,290},
@@ -119,7 +119,7 @@ short temptable[NUMTEMPS][2] = {
 {773,20},
 {774,10}
 };
-*/
+
 /*{1024,0},
 {1023,10},
 {1022,20},
