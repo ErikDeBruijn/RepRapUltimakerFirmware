@@ -210,11 +210,10 @@ targetTemp = target;
   
   output = constrain(output, 0, 255);
   //if(outString == "")
-  if(true)
+#ifdef DEBUG_PID
+  if(heat_pin == DEBUG_PID)
   {
-    if(heat_pin == EXTRUDER_0_HEATER_PIN)
-    {
-    sprintf(talkToHost.string(), 
+  sprintf(talkToHost.string(), 
 
             "target %d, cur %d, err %d, P:  (%d*%d = %d), I: (%d*%d = %d), D: (%d*%d = %d) = OUT: %d", 
 
@@ -237,11 +236,8 @@ targetTemp = target;
             (int)(derivative * dGain), 
 
             (byte) output);
-    } 
-  } else {
-      sprintf(talkToHost.string(), "Overshoot? %d > %d", (int) integral, (int) E_TEMP_PID_I_LIMIT); 
-
-  }
+  } 
+#endif
   analogWrite(heat_pin, (byte)output);
 }
 
