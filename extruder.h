@@ -86,6 +86,11 @@ private:
    
 };
 
+inline int extruder::getTarget()
+{
+   return targetTemperature;
+}
+
 inline void extruder::enableStep()
 {
   if(step_en_pin < 0)
@@ -102,13 +107,16 @@ inline void extruder::disableStep()
 #endif
 }
 
+#if MOVEMENT_TYPE == MOVEMENT_TYPE_STEP_DIR
 inline void extruder::sStep()
 {
    digitalWrite(motor_speed_pin, HIGH);
    delayMicrosecondsInterruptible(5); 
    digitalWrite(motor_speed_pin, LOW);
 }
-
+#else 
+error TODO not yet implemented here
+#endif
 
 inline void extruder::setDirection(bool dir)
 {
@@ -163,6 +171,7 @@ public:
    int getBedTemperature();
    void setBedTemperature(int temp);
    int getTemperature();
+   int getTarget();
    void manage();
    void sStep();
    void enableStep();
@@ -248,6 +257,11 @@ inline  void extruder::setTemperature(int temp)
    targetTemperature = temp;
    buildNumberCommand(SET_T, temp);
    talker.sendPacketAndCheckAcknowledgement(my_name, commandBuffer); 
+}
+
+inline int extruder::getTarget()
+{
+   return targetTemperature;
 }
 
 inline  int extruder::getTemperature()
@@ -373,6 +387,7 @@ public:
    void setCooler(byte e_speed);
    void setTemperature(int temp);
    int getTemperature();
+   int getTarget();
    void slowManage();
    void manage();
    void sStep();
