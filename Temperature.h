@@ -12,7 +12,7 @@
 
 // This is the extruder thermistor...
 
-/*
+
 // RS thermistor 528-8592; EPCOS NTC G540 
 // ./createTemperatureLookup.py --r0=100000 --t0=25 --r1=0 --r2=4700 --beta=4036 --max-adc=1023
 // r0: 100000
@@ -21,7 +21,7 @@
 // r2: 4700
 // beta: 4036
 // max adc: 1023
-#define NUMTEMPS 20
+/*#define NUMTEMPS 20
 short temptable[NUMTEMPS][2] = {
    {1, 864},
    {54, 258},
@@ -408,4 +408,3 @@ short temptable[NUMTEMPS][2] = {
 #endif
 #endif
 #endif
-

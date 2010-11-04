@@ -14,10 +14,12 @@ PIDcontrol::PIDcontrol(byte hp, byte tp, bool b)
      pGain = B_TEMP_PID_PGAIN;
      iGain = B_TEMP_PID_IGAIN;
      dGain = B_TEMP_PID_DGAIN;
+     band = B_TEMP_PID_BAND;
    } else {
      pGain = E_TEMP_PID_PGAIN;
      iGain = E_TEMP_PID_IGAIN;
      dGain = E_TEMP_PID_DGAIN;
+     band = E_TEMP_PID_BAND;
    }
    currentTemperature = 0;
    reset();
@@ -168,6 +170,7 @@ if((fancy_iterator++)==40)
 
 void PIDcontrol::pidCalculation(int target)
 {
+  String outString ="";
 #ifdef FANCY_LCD
 targetTemp = target;
 #endif
@@ -183,16 +186,59 @@ targetTemp = target;
   time = millis();
   float dt = 0.001*(float)(time - previousTime);
   previousTime = time;
+  //sprintf(talkToHost.string(),"test");
   if (dt <= 0) // Don't do it when millis() has rolled over
     return;
     
   float error = (float)(target - currentTemperature);
-  integral += error*dt;
+  integral = integral + error*dt;
+  // prevent overshoots
+  if(integral > E_TEMP_PID_I_LIMIT)
+  {
+    outString = "Integral above limit";
+    integral = E_TEMP_PID_I_LIMIT;
+  }
+
+  // Integral below limit (integral wind-down?)
+  if(integral < -E_TEMP_PID_I_LIMIT)
+  {
+    integral = -E_TEMP_PID_I_LIMIT;
+  }
   float derivative = (error - previousError)/dt;
   previousError = error;
   int output = (int)(error*pGain + integral*iGain + derivative*dGain);
+  
   output = constrain(output, 0, 255);
-  analogWrite(heat_pin, output);
+  //if(outString == "")
+#ifdef DEBUG_PID
+  if(heat_pin == DEBUG_PID)
+  {
+  sprintf(talkToHost.string(), 
+
+            "target %d, cur %d, err %d, P:  (%d*%d = %d), I: (%d*%d = %d), D: (%d*%d = %d) = OUT: %d", 
+
+            target, currentTemperature, error, 
+
+            (int)(pGain * 1000), 
+
+            (int)(error * pGain), 
+
+            (int)(integral), 
+
+            (int)(iGain * 1000), 
+
+            (int)(integral * iGain), 
+
+            (int)(derivative * 1000), 
+
+            (int)(dGain * 1000), 
+
+            (int)(derivative * dGain), 
+
+            (byte) output);
+  } 
+#endif
+  analogWrite(heat_pin, (byte)output);
 }
 
 void PIDcontrol::shutdown()

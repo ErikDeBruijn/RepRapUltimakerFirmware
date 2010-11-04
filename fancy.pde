@@ -4,9 +4,11 @@
  *
 */
 #include "fancy.h"
+#include "pins.h"
 #ifdef FANCY_LCD
 #include <LiquidCrystal.h>
-LiquidCrystal lcd(24, 22, 36, 34, 32, 30);  //RS,Enable,D4,D5,D6,D7 //deze is voor onze pcb
+
+LiquidCrystal lcd(LCD_PINS1,LCD_PINS2,LCD_PINS3,LCD_PINS4,LCD_PINS5,LCD_PINS6);  //RS,Enable,D4,D5,D6,D7 //deze is voor onze pcb
 #endif
 
 #ifdef FANCY
@@ -27,10 +29,10 @@ void fancy_init()
 // set up the LCD's number of rows and columns:
 byte Degree[8] =
 {
-  B01110,
-  B10001,
-  B10001,
-  B01110,
+  B01100,
+  B10010,
+  B10010,
+  B01100,
   B00000,
   B00000,
   B00000,
