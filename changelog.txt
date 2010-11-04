@@ -1,0 +1,4 @@
+Version 0021-1
+Erik: Added LCD support for Ultimaker and others (http://github.com/ErikDeBruijn/RepRapUltimakerFirmware/issues#issue/2)
+Erik: Added support for BitsFromBytes extruder's thermistor (THIS HOT-END isn't recommended, I just had bought a few and one still works, so I made this temp. table) 
+Erik: Minor clean-ups in configuration.h
