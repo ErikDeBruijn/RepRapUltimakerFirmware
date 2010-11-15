@@ -77,7 +77,7 @@
 #define INVERT_Y_DIR 0
 
 // This stepper driver should be in QUARTER STEP MODE (LOW/HIGH/LOW I think)
-#define Z_STEPS_PER_MM   200*8/1.25
+#define Z_STEPS_PER_MM   200*4/1.25
 #define INVERT_Z_DIR 1
 
 // Stepper-driven extruder
@@ -167,12 +167,12 @@
 // Extruding increase biases the input to the extruder heater when the extruder
 // is running as it requires more power.
 
-#define E_TEMP_PID_PGAIN 6.5// HIGHER: quicker 
+#define E_TEMP_PID_PGAIN 5.5// HIGHER: quicker 
 #define E_TEMP_PID_IGAIN 0.50 // HIGHER: makes overshoot bigger, but also shorter if you LIMIT it, see below)
 #define E_TEMP_PID_DGAIN 0.2 // Not doing much good
 #define E_TEMP_PID_BAND 0.0
 // To prevent integral windup, allow the I*GAIN to only have this much influence (below 255 makes sense):
-#define E_TEMP_PID_I_LIMIT 200/E_TEMP_PID_IGAIN
+#define E_TEMP_PID_I_LIMIT 60/E_TEMP_PID_IGAIN
 #define EXTRUDING_INCREASE 7
 
 #define B_TEMP_PID_PGAIN 2
@@ -181,7 +181,7 @@
 #define B_TEMP_PID_BAND 1000.0
 
 // To turn on PID debugging strings, set this to EXTRUDER_0_HEATER_PIN, EXTRUDER_1_HEATER_PIN or BED_HEATER_PIN
-#define DEBUG_PID EXTRUDER_0_HEATER_PIN
+//#define DEBUG_PID EXTRUDER_0_HEATER_PIN
 
 // The width of Henry VIII's thumb (or something).
 
