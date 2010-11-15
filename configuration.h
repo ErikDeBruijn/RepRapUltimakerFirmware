@@ -77,7 +77,7 @@
 #define INVERT_Y_DIR 0
 
 // This stepper driver should be in QUARTER STEP MODE (LOW/HIGH/LOW I think)
-#define Z_STEPS_PER_MM   200*8/1.25
+#define Z_STEPS_PER_MM   200*8/6 //200*8/1.25
 #define INVERT_Z_DIR 1
 
 // Stepper-driven extruder
