@@ -97,6 +97,8 @@
 // Make sure FANCY is defined if you want to have this enabled, otherwise comment it out.
 #define FANCY
 #define FANCY_LCD
+// Here you can choose 0.0-1.0 for the power to the LED array.
+#define FANCY_LED_PWM_MULTIPLY 0.3 // in case you run everything at a voltage higher than 12V!
 
 #endif
 

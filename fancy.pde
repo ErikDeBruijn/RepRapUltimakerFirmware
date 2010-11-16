@@ -63,21 +63,21 @@ lcd.print("Ready to connect");
 }
 void setRGB(byte r, byte g, byte b)
 {
-  analogWrite(RGB_R_PIN,r);
-  analogWrite(RGB_G_PIN,g);
-  analogWrite(RGB_B_PIN,b);
+  analogWrite(RGB_R_PIN,FANCY_LED_PWM_MULTIPLY*r);
+  analogWrite(RGB_G_PIN,FANCY_LED_PWM_MULTIPLY*g);
+  analogWrite(RGB_B_PIN,FANCY_LED_PWM_MULTIPLY*b);
 }
 void set_RGB_R(byte r)
 {
-  analogWrite(RGB_R_PIN,r);
+  analogWrite(RGB_R_PIN,FANCY_LED_PWM_MULTIPLY*r);
 }
 void set_RGB_G(byte g)
 {
-  analogWrite(RGB_R_PIN,g);
+  analogWrite(RGB_R_PIN,FANCY_LED_PWM_MULTIPLY*g);
 }
 void set_RGB_B(byte b)
 {
-  analogWrite(RGB_R_PIN,b);
+  analogWrite(RGB_R_PIN,FANCY_LED_PWM_MULTIPLY*b);
 }
 
 #endif
