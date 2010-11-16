@@ -116,8 +116,7 @@
 #define EXTRUDER_0_DIR_PIN (byte)45
 #define EXTRUDER_0_ENABLE_PIN (byte)41
 #define EXTRUDER_0_HEATER_PIN (byte)2
-#define EXTRUDER_0_TEMPERATURE_PIN (byte)9// 0 = thermocouple exp. board.//9 = THERM1, 10=THERM2
-
+#define EXTRUDER_0_TEMPERATURE_PIN (byte)0// 0 = thermocouple exp. board.//9 = THERM1, 10=THERM2
 #define EXTRUDER_1_STEP_PIN (byte)49 // extruder volledig getest, werkt OOK!!
 #define EXTRUDER_1_DIR_PIN (byte)47
 #define EXTRUDER_1_ENABLE_PIN (byte)51
