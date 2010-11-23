@@ -42,8 +42,8 @@
 #if MOTHERBOARD == 3
 
 // Comment out this if you are using a thermocouple
-//#define USE_THERMISTOR
-#define AD595_THERMOCOUPLE
+#define USE_THERMISTOR
+//#define AD595_THERMOCOUPLE
 //#define MAX6675_THERMOCOUPLE
 
 // Set to 1 if enable pins are inverting
