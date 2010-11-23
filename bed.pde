@@ -5,6 +5,7 @@
  * is done by an extruder controller.
  */
 
+#define MANTISROUTER
 
 #if MOTHERBOARD != 2
 
@@ -13,6 +14,8 @@ static PIDcontrol bPID(BED_HEATER_PIN, BED_TEMPERATURE_PIN, true);
 
 bed::bed(byte heat, byte temp)
 {
+  #ifndef MANTISROUTER
+  
   heater_pin = heat;
   temp_pin = temp;
 
@@ -31,41 +34,63 @@ bed::bed(byte heat, byte temp)
   targetTemperature = 0;
 
   setTemperature(targetTemperature);
+  
+  #endif
 }
 
 void bed::controlTemperature()
 {   
+  #ifndef MANTISROUTER
+  
   bedPID->pidCalculation(targetTemperature);
+  
+  #endif
 }
 
 
 
 void bed::slowManage()
 {
+  #ifndef MANTISROUTER
+  
   manageCount = 0;  
 
   controlTemperature();
+  
+  #endif
 }
 
 void bed::manage()
 {
+  #ifndef MANTISROUTER
+   
   manageCount++;
   if(manageCount > SLOW_CLOCK)
     slowManage();   
+    
+  #endif
 }
 
 // Stop everything
 
 void bed::shutdown()
 {
+  #ifndef MANTISROUTER
+  
   setTemperature(0);
   bedPID->shutdown();
+  
+  #endif
 }
 
 void bed::setTemperature(int tp)
 {
+  #ifndef MANTISROUTER
+  
   bedPID->reset();
   targetTemperature = tp;
+  
+  #endif
 }
 
 int bed::getTemperature()

@@ -379,7 +379,7 @@ void extruder::setDirection(bool direction)
 
 void extruder::setCooler(byte e_speed)
 {
-  //analogWrite(fan_pin, e_speed);   
+  analogWrite(fan_pin, e_speed);   
 }
 
 void extruder::setTemperature(int tp)

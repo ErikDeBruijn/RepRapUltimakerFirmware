@@ -3,6 +3,8 @@
 
 #define MOTHERBOARD 3
 
+#define MANTISROUTER 1
+
 // Set this to 0, 1, x for board versions v1.0, v1.1 or v1.x, etc.
 #define ULTIMAKER_BOARD_MINOR_VERSION 1
 
@@ -49,10 +51,21 @@
 #define Z_MAX_PIN (byte)14
 #define Z_ENABLE_PIN (byte)35
 
+#ifdef MANTISROUTER
+
+#define SPINDLE_PWM_PIN (byte)4
+
+#define BED_HEATER_PIN (byte)0 
+#define BED_TEMPERATURE_PIN (byte)10 
+
+#else
+
 // Heated bed
 
 #define BED_HEATER_PIN (byte)4 // Therm 3
 #define BED_TEMPERATURE_PIN (byte)10 // 
+
+#endif
 
 //extruder pins
 
@@ -107,8 +120,19 @@
 
 // Heated bed
 
+#ifdef MANTISROUTER
+
+#define SPINDLE_PWM_PIN (byte)4
+
+#define BED_HEATER_PIN (byte)0
+#define BED_TEMPERATURE_PIN (byte)11
+
+#else
+
 #define BED_HEATER_PIN (byte)4 // Therm 3
 #define BED_TEMPERATURE_PIN (byte)11 // 
+
+#endif
 
 //extruder pins
 

@@ -24,6 +24,9 @@
 
 #define MOTHERBOARD 3 
 
+// For use with the Mantis router define MANTISROUTER 
+#define MANTISROUTER
+
 // The number of real extruders in this machine
 
 #define EXTRUDER_COUNT 1
@@ -68,6 +71,21 @@
 
 // Axis scaling in stepper-motor steps per mm of movement
 
+#ifdef MANTISROUTER
+//Alternate settings for the Mantis router
+
+#define X_STEPS_PER_MM  533.3333
+#define INVERT_X_DIR 1
+
+#define Y_STEPS_PER_MM  533.3333
+#define INVERT_Y_DIR 0
+
+#define Z_STEPS_PER_MM  533.3333
+#define INVERT_Z_DIR 1
+
+#else
+// Normal settings for Ultimaker
+
 // Select 1/16 STEP!
 #define X_STEPS_PER_MM   79.87220447 //Ultimaker's belt pitch is 2.032mm. 2.032*20=40.064. 40.064/200/16 mm/step
 #define INVERT_X_DIR 1
@@ -79,6 +97,8 @@
 // This stepper driver should be in QUARTER STEP MODE (LOW/HIGH/LOW I think)
 #define Z_STEPS_PER_MM   200*4/1.25
 #define INVERT_Z_DIR 1
+
+#endif
 
 // Stepper-driven extruder
 // E_STEPS_PER_MM is the number of steps needed to 
@@ -95,10 +115,8 @@
 
 // If you want to enable fancy stuff like RGB LEDs for feedback and just to show off.
 // Make sure FANCY is defined if you want to have this enabled, otherwise comment it out.
-#define FANCY
-#define FANCY_LCD
-// Here you can choose 0.0-1.0 for the power to the LED array.
-#define FANCY_LED_PWM_MULTIPLY 0.3 // in case you run everything at a voltage higher than 12V!
+//#define FANCY
+//#define FANCY_LCD
 
 #endif
 
@@ -123,9 +141,14 @@
 
 #define SMALL_DISTANCE2 (SMALL_DISTANCE*SMALL_DISTANCE) // *RO
 
+#ifdef MANTISROUTER
+#define FAST_XY_FEEDRATE 4000.0
+#define FAST_Z_FEEDRATE  40.0
+#else
 //our maximum feedrates in mm/minute
 #define FAST_XY_FEEDRATE 4000.0
 #define FAST_Z_FEEDRATE  75.0
+#endif
 
 // Data for acceleration calculations
 // Comment out the next line to turn accelerations off
@@ -134,9 +157,17 @@
 // To enable acceleration by default, configure to true. It can be turned of with M-code M142
 //acceleration_enabled = true;
 
+#ifdef MANTISROUTER
+
+#define SLOW_XY_FEEDRATE 10 // Speed from which to start accelerating
+#define SLOW_Z_FEEDRATE 10
+
+#else
+
 #define SLOW_XY_FEEDRATE 1200.0 // Speed from which to start accelerating
 #define SLOW_Z_FEEDRATE 45
 
+#endif
 
 #if INVERT_ENABLE_PINS == 1  // *RO
 #define ENABLE_ON LOW        // *RO
@@ -170,7 +201,7 @@
 // is running as it requires more power.
 
 #define E_TEMP_PID_PGAIN 5.5// HIGHER: quicker 
-#define E_TEMP_PID_IGAIN 0.50 // HIGHER: makes overshoot bigger, but also shorter if you LIMIT it, see below)
+#define E_TEMP_PID_IGAIN 0.50 // HIGHER: makes overshoot bigger, but also shorter if you LIMIT it, see below
 #define E_TEMP_PID_DGAIN 0.2 // Not doing much good
 #define E_TEMP_PID_BAND 0.0
 // To prevent integral windup, allow the I*GAIN to only have this much influence (below 255 makes sense):
