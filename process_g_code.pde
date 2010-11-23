@@ -92,7 +92,7 @@ FloatPoint sp;
 #define DEBUG_INFO (1<<1)
 #define DEBUG_ERRORS (1<<2)
 
-byte SendDebug =  DEBUG_INFO | DEBUG_ERRORS;
+byte SendDebug =  false;//DEBUG_INFO | DEBUG_ERRORS;
 
         
 // The following three inline functions are used for things like return to 0
@@ -229,7 +229,7 @@ void get_and_do_command()
                 // Terminate string
                 cmdbuffer[serial_count] = 0;
                 
-                if(SendDebug & DEBUG_ECHO)
+                if(SendDebug && DEBUG_ECHO)
                    sprintf(talkToHost.string(), "Echo: %s", cmdbuffer);
                    
 		//process our command!
@@ -319,8 +319,9 @@ void process_string(char instruction[], int size)
                 sprintf(talkToHost.string(), "Serial Error: checksum without line number. Checksum: %d, line received: %s", gc.Checksum, instruction);
               else
                 sprintf(talkToHost.string(), "Serial Error: line number without checksum. Linenumber: %d, line received: %s", gc.N, instruction);
+           
+             talkToHost.setResend(gc.LastLineNrRecieved+1);
            }
-           talkToHost.setResend(gc.LastLineNrRecieved+1);
            return;
           }
           // Check checksum of this string. Flush buffers and re-request line of error is found
@@ -335,8 +336,10 @@ void process_string(char instruction[], int size)
             if(gc.Checksum != (int)checksum)
             {
               if(SendDebug & DEBUG_ERRORS)
+              {
                 sprintf(talkToHost.string(), "Serial Error: checksum mismatch.  Remote (%d) not equal to local (%d), line received: %s", gc.Checksum, (int)checksum, instruction);
-              talkToHost.setResend(gc.LastLineNrRecieved+1);
+                talkToHost.setResend(gc.LastLineNrRecieved+1);
+              }
               return;
             }
           // Check that this lineNr is LastLineNrRecieved+1. If not, flush
@@ -344,8 +347,10 @@ void process_string(char instruction[], int size)
             if(gc.N != gc.LastLineNrRecieved+1)
             {
                 if(SendDebug & DEBUG_ERRORS)
+                {
                   sprintf(talkToHost.string(), "Serial Error: Linenumber (%d) is not last + 1 (%d), line received: %s", gc.N, gc.LastLineNrRecieved+1, instruction);
-                talkToHost.setResend(gc.LastLineNrRecieved+1);
+                  talkToHost.setResend(gc.LastLineNrRecieved+1);
+                }
                 return;
             }
            //If we reach this point, communication is a succes, update our "last good line nr" and continue
@@ -399,7 +404,11 @@ void process_string(char instruction[], int size)
 
 		// Get feedrate if supplied - feedrates are always absolute???
 		if ( gc.seen & GCODE_F )
-			fp.f = gc.F;
+                {
+			
+                  fp.fs = gc.F;
+                  fp.f = gc.F;
+                }
                
                 // Process the buffered move commands first
                 // If we get one, return immediately
@@ -419,6 +428,7 @@ void process_string(char instruction[], int size)
                         // Controlled move; -ve coordinate means zero the axis
 			case 1:
 // ERIK: acceleration on?! if(accelleration_enabled) acceleration_on = true;
+                                 fp.f = fp.fs;
                                  qMove(fp);
                                  return;                                  
                                 
@@ -494,9 +504,11 @@ void process_string(char instruction[], int size)
 				break;
 
 			default:
-				if(SendDebug & DEBUG_ERRORS)
+				if(SendDebug && DEBUG_ERRORS)
+                                {
                                   sprintf(talkToHost.string(), "Dud G code: G%d", gc.G);
-                                talkToHost.setResend(gc.LastLineNrRecieved+1);
+                                  talkToHost.setResend(gc.LastLineNrRecieved+1);
+                                }
 		  }
 	}
 
@@ -506,6 +518,7 @@ void process_string(char instruction[], int size)
 	//find us an m code.
 	if (gc.seen & GCODE_M)
 	{
+            
             // Wait till the q is empty first
             while(!qEmpty()) delay(WAITING_DELAY);
             //delay(2*WAITING_DELAY);
@@ -525,6 +538,14 @@ void process_string(char instruction[], int size)
 				 //todo: program end
 				 break;
 				 */
+                      case 3:
+                              EnableSpindle(true);
+                              if (gc.seen & GCODE_S) SetSpindleSpeed((int)gc.S);
+                              return;
+                              
+                      case 5:
+                              EnableSpindle(false);
+                              return;
 
 // Now, with E codes, there is no longer any idea of turning the extruder on or off.
 // (But see valve on/off below.)
@@ -644,14 +665,18 @@ void process_string(char instruction[], int size)
                                 break;                                
 
 			default:
-				if(SendDebug & DEBUG_ERRORS)
+				if(SendDebug && DEBUG_ERRORS)
+                                {
                                   sprintf(talkToHost.string(), "Dud M code: M%d", gc.M);
-                                talkToHost.setResend(gc.LastLineNrRecieved+1);
+                                  talkToHost.setResend(gc.LastLineNrRecieved+1);
+                                }
 		}
 
                 
 
 	}
+
+
 
 // Tool (i.e. extruder) change?
                 

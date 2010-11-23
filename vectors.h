@@ -14,6 +14,7 @@ struct FloatPoint
 	float z;
         float e;   // Extrude length
         float f;   // Feedrate
+        float fs;  // Feedrate storage
 };
 
 inline FloatPoint operator+(const FloatPoint& a, const FloatPoint& b)
