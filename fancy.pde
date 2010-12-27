@@ -19,7 +19,7 @@ void fancy_init()
   pinMode(RGB_R_PIN,OUTPUT);
   pinMode(RGB_G_PIN,OUTPUT);
   pinMode(RGB_B_PIN,OUTPUT);
-  for(byte i=0;i<255;i++)
+  for(byte i=10;i<255;i++)
   {
     setRGB(i*.75,i*.75,i);
     delay(4);
@@ -50,11 +50,12 @@ byte Thermometer[8] =
   B01110
 };
 
+lcd.begin(16, 2);   //opgeven wat voor lcd
 lcd.createChar(0,Degree);
 lcd.createChar(1,Thermometer);
-lcd.begin(16, 2);   //opgeven wat voor lcd
+lcd.clear();
 // Print a message to the LCD.
-lcd.print("Ultimaker  v1.0!");
+lcd.print("Ultimaker  v1.1!");
 lcd.setCursor(0, 1);    //begin van de regel (0) en op de 2de rij (1)
 //         1234567890123456
 lcd.print("Ready to connect");
