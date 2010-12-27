@@ -144,13 +144,13 @@ if((fancy_iterator++)==40)
   Status += targetTemp;
   Status += "'C,";
   Status += bedTemp;
-  Status +="'C    ";
+  Status +="'C     ";
   lcd.print(Status);
   lcd.setCursor(0, 1); //termometer sign
   lcd.write(1);
   lcd.setCursor(5+((currentTemperature>99)?1:0)+((targetTemp>9)?1:0)+((targetTemp>99)?1:0), 1);    //begin van de regel (0) en op de 2de rij (1)
   lcd.write(0);
-  lcd.setCursor(10+((currentTemperature>99)?1:0)+((targetTemp>9)?1:0)+((targetTemp>99)?1:0)+((bedTemp>99)?1:0), 1);    //begin van de regel (0) en op de 2de rij (1)
+  lcd.setCursor(9+((currentTemperature>99)?1:0)+((targetTemp>9)?1:0)+((targetTemp>99)?1:0)+((bedTemp>9)?1:0)+((bedTemp>99)?1:0), 1);    //begin van de regel (0) en op de 2de rij (1)
   lcd.write(0);
   //lcd.setCursor(2, 1);    //begin van de regel (0) en op de 2de rij (1)
   //         1234567890123456
