@@ -1,3 +1,9 @@
+////////
+////// TODO: IMPLEMENT TEMP SAFETY!!!!
+////// Test: pull out the thermistor: should stop/pause immediately
+////// Test: thermistor gives low/decreasing reading for too long during full power. Should turn off when it's for too long.
+////////
+
 #ifndef PINS_H
 #define PINS_H
 
@@ -29,7 +35,7 @@
 // SELECT THE VERSION OF THE MOTHERBOARD THAT YOU HAVE.
 #if ULTIMAKER_BOARD_MINOR_VERSION == 1
 
-#define DEBUG_PIN        3
+#define DEBUG_PIN        4
 
 #define X_STEP_PIN (byte)25
 #define X_DIR_PIN (byte)23
@@ -82,7 +88,7 @@
 
 #if ULTIMAKER_BOARD_MINOR_VERSION == 0
 
-#define DEBUG_PIN        3
+#define DEBUG_PIN        4
 
 #define X_STEP_PIN (byte)25
 #define X_DIR_PIN (byte)23
@@ -108,20 +114,20 @@
 // Heated bed
 
 #define BED_HEATER_PIN (byte)4 // Therm 3
-#define BED_TEMPERATURE_PIN (byte)11 // 
+#define BED_TEMPERATURE_PIN (byte)10 // 
 
 //extruder pins
-
-#define EXTRUDER_0_STEP_PIN (byte)43 // extruder volledig getest, werkt!
-#define EXTRUDER_0_DIR_PIN (byte)45
-#define EXTRUDER_0_ENABLE_PIN (byte)41
+// Extruders 0 and 1 are swapped!!!
+#define EXTRUDER_0_STEP_PIN (byte)49//43 // extruder volledig getest, werkt!
+#define EXTRUDER_0_DIR_PIN (byte)47//45
+#define EXTRUDER_0_ENABLE_PIN (byte)51//41
 #define EXTRUDER_0_HEATER_PIN (byte)2
 #define EXTRUDER_0_TEMPERATURE_PIN (byte)9// 0 = thermocouple exp. board.//9 = THERM1, 10=THERM2
-#define EXTRUDER_1_STEP_PIN (byte)49 // extruder volledig getest, werkt OOK!!
-#define EXTRUDER_1_DIR_PIN (byte)47
-#define EXTRUDER_1_ENABLE_PIN (byte)51
-#define EXTRUDER_1_HEATER_PIN (byte)3
-#define EXTRUDER_1_TEMPERATURE_PIN (byte)10 
+#define EXTRUDER_1_STEP_PIN (byte)43//49 // extruder volledig getest, werkt OOK!!
+#define EXTRUDER_1_DIR_PIN (byte)45//47
+#define EXTRUDER_1_ENABLE_PIN (byte)41//51
+#define EXTRUDER_1_HEATER_PIN (byte)4
+#define EXTRUDER_1_TEMPERATURE_PIN (byte)11 
 
 #define LCD_PINS1 (byte)24
 #define LCD_PINS2 (byte)22
