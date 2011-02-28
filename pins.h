@@ -29,12 +29,12 @@
 // SELECT THE VERSION OF THE MOTHERBOARD THAT YOU HAVE.
 #if ULTIMAKER_BOARD_MINOR_VERSION == 1
 
-#define DEBUG_PIN        0
+#define DEBUG_PIN        4
 
 #define X_STEP_PIN (byte)25
 #define X_DIR_PIN (byte)23
-#define X_MIN_PIN (byte)19
-#define X_MAX_PIN (byte)18
+#define X_MIN_PIN (byte)15
+#define X_MAX_PIN (byte)14
 #define X_ENABLE_PIN (byte)27
 
 #define Y_STEP_PIN (byte)31
@@ -45,8 +45,8 @@
 
 #define Z_STEP_PIN (byte)37 
 #define Z_DIR_PIN (byte)39
-#define Z_MIN_PIN (byte)15
-#define Z_MAX_PIN (byte)14
+#define Z_MIN_PIN (byte)19
+#define Z_MAX_PIN (byte)18
 #define Z_ENABLE_PIN (byte)35
 
 // Heated bed
@@ -68,7 +68,6 @@
 #define EXTRUDER_1_HEATER_PIN (byte)3
 #define EXTRUDER_1_TEMPERATURE_PIN (byte)9 
 
-// NOT CHECKED YET!!!! VERIFY THIS!!!!
 #define LCD_PINS1 (byte)24
 #define LCD_PINS2 (byte)22
 #define LCD_PINS3 (byte)36
