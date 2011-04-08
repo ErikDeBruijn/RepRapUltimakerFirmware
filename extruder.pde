@@ -58,7 +58,7 @@ void extruder::waitForTemperature()
         else
         {
           // Temp isn't increasing - extruder hardware error
-          temperatureError();
+          //temperatureError();
           return;
         }
       }

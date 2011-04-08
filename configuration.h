@@ -42,8 +42,8 @@
 #if MOTHERBOARD == 3
 
 // Comment out this if you are using a thermocouple
-#define USE_THERMISTOR
-//#define AD595_THERMOCOUPLE
+//#define USE_THERMISTOR
+#define AD595_THERMOCOUPLE
 //#define MAX6675_THERMOCOUPLE
 
 // Set to 1 if enable pins are inverting
@@ -77,7 +77,7 @@
 #define INVERT_Y_DIR 0
 
 // This stepper driver should be in EIGHT STEP MODE (LOW/HIGH/LOW)
-#define Z_STEPS_PER_MM   200*8/1.25
+#define Z_STEPS_PER_MM   200*8/3//1.25
 #define INVERT_Z_DIR 1
 
 // Stepper-driven extruder
@@ -96,7 +96,7 @@
 // If you want to enable fancy stuff like RGB LEDs for feedback and just to show off.
 // Make sure FANCY is defined if you want to have this enabled, otherwise comment it out.
 #define FANCY
-#define FANCY_LCD
+//#define FANCY_LCD
 // Here you can choose 0.0-1.0 for the power to the LED array.
 #define FANCY_LED_PWM_MULTIPLY 0.3 // in case you run everything at a voltage higher than 12V!
 
@@ -153,7 +153,7 @@
 
 #define DISABLE_X 0
 #define DISABLE_Y 0
-#define DISABLE_Z 1
+#define DISABLE_Z 0
 #define DISABLE_E 0
 
 // The number of 5-second intervals to wait at the target temperature for things to stabilise.
