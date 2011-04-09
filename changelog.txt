@@ -1,8 +1,0 @@
-Version 0021-2-Ultimaker
-Erik: Added initial support for the 1.5.3 PCB. Only the endstops are configured, LCD header still needs to be done.
-Erik: Improved the PID settings for the new extruder with the 40W cartridge heater
-Erik: Improved PID control with a confirable limit in the I (integral) factor.
-Erik: Put your Z-axis stepper motor in Quarter step mode: (left to right) Low, High, Low
-Erik: Added LCD support for Ultimaker and others (http://github.com/ErikDeBruijn/RepRapUltimakerFirmware/issues#issue/2)
-Erik: Added support for BitsFromBytes extruder's thermistor (THIS HOT-END isn't recommended, I just had bought a few and one still works, so I made this temp. table) 
-Erik: Further settings and cleanups for Ultimaker branch! (in configuration.h and pins.h)
